@@ -24,7 +24,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $allowed_register = Setting::where('allowed_register','yes')->first();
-
+        $getClientIp = trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com"));
         if($allowed_register){
             DB::table('settings')->update(['allowed_register' => 'nope']);
         Validator::make($input, [
@@ -35,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
          $result = Http::post(env('command_center_address').'/store_client_ip',[
-                             'ip_address'=> request()->getClientIp(),
+            'ip_address'=> $getClientIp,
          ]);
          info($result);
         return User::create([

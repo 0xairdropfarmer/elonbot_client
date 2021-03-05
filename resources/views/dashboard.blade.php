@@ -30,7 +30,7 @@
 <div class="leading-loose">
     <form class="max-w-xl p-10 m-4 bg-white rounded shadow-xl" action="{{route('savebinancekey')}}" method="post" >
         @csrf
-        <p class="font-medium text-gray-800">2.Set Binance API Key</p>
+        <p class="font-medium text-gray-800">1.Set Binance API Key</p>
         <div class="mt-4">
          <label class="block text-sm text-gray-00" for="BINANCE_API_KEY">BINANCE_API_KEY</label>
          <input value="{{DotenvEditor::getValue('BINANCE_API_KEY')}}" class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" id="BINANCE_API_KEY" name="BINANCE_API_KEY" type="text" required="" placeholder="Your BINANCE_API_KEY" aria-label="Name">
@@ -48,7 +48,7 @@
 <div class="leading-loose">
 <form class="max-w-xl p-10 m-4 bg-white rounded shadow-xl" action="{{route('adjustorder')}}" method="post" >
     @csrf
-    <p class="font-medium text-gray-800">3.Adjust Order ( buy with market price )</p>
+    <p class="font-medium text-gray-800">2.Adjust Order ( buy with market price )</p>
     <div class="mt-4">
       <label class="block text-sm text-gray-00" for="buydoge">Buy Doge Coin</label>
        <div class="mt-2">
@@ -83,7 +83,7 @@
  <div class="leading-loose">
   <form class="max-w-xl p-10 m-4 bg-white rounded shadow-xl" action="{{route('setstatus')}}" method="post" >
      @csrf
-    <p class="font-medium text-gray-800">4.Start or stop bot</p>
+    <p class="font-medium text-gray-800">3.Start or stop bot</p>
   <div class="mt-4">
   <div class="mt-2">
 
