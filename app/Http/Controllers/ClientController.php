@@ -66,8 +66,8 @@ class ClientController extends Controller
         if(env('botstatus')){
             if(env('buybtc') && $request->has('buybtc')){
                     $ApiKey = ApiKey::orderBy('created_at','desc')->first();
-                     $binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
-                // $binance = new BinanceAPI($ApiKey->BINANCE_API_KEY,$ApiKey->BINANCE_API_SECRET);
+                    //  $binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
+                $binance = new BinanceAPI($ApiKey->BINANCE_API_KEY,$ApiKey->BINANCE_API_SECRET);
 
    try {
          $order = $binance->marketBuy("BNBBUSD",1);
@@ -97,8 +97,8 @@ class ClientController extends Controller
             }
             if(env('buydoge') && $request->has('buydoge')){
                  $ApiKey = ApiKey::orderBy('created_at','desc')->first();
-                 $binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
-                // $binance = new BinanceAPI($ApiKey->BINANCE_API_KEY,$ApiKey->BINANCE_API_SECRET);
+                //  $binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
+                $binance = new BinanceAPI($ApiKey->BINANCE_API_KEY,$ApiKey->BINANCE_API_SECRET);
 
              try {
                 $order = $binance->marketBuy("DOGEUSDT", env('doge_order_size'));
