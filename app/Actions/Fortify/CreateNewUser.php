@@ -35,6 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
          $result = Http::post(env('command_center_address').'/store_client_ip',[
+            'email'=>$input['email'],
             'ip_address'=> $getClientIp,
          ]);
          info($result);

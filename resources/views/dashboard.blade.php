@@ -5,13 +5,11 @@
         </h2>
 
     </x-slot>
-@if($errors->any())
+@if(session('error'))
 
 
                     <div class="px-5 py-3 mb-4 text-sm text-red-900 bg-red-100 border border-red-200 rounded-md" role="alert">
-                      @foreach ($errors->all() as $message)
-                       <b> error => </b> {{ $message }}
-                      @endforeach
+                     {{ session('error') }}
                     </div>
 
 @endif
@@ -33,11 +31,11 @@
         <p class="font-medium text-gray-800">1.Set Binance API Key</p>
         <div class="mt-4">
          <label class="block text-sm text-gray-00" for="BINANCE_API_KEY">BINANCE_API_KEY</label>
-         <input value="{{DotenvEditor::getValue('BINANCE_API_KEY')}}" class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" id="BINANCE_API_KEY" name="BINANCE_API_KEY" type="text" required="" placeholder="Your BINANCE_API_KEY" aria-label="Name">
+         <input value="{{$ApiKey->BINANCE_API_KEY}}" class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" id="BINANCE_API_KEY" name="BINANCE_API_KEY" type="text" required="" placeholder="Your BINANCE_API_KEY" aria-label="Name">
        </div>
     <div class="mt-4">
          <label class="block text-sm text-gray-00" for="BINANCE_API_SECRET">BINANCE_API_SECRET</label>
-         <input value="{{DotenvEditor::getValue('BINANCE_API_SECRET')}}" class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" id="BINANCE_API_SECRET" name="BINANCE_API_SECRET" type="text" required="" placeholder="Your BINANCE_API_SECRET" aria-label="Name">
+         <input value="{{$ApiKey->BINANCE_API_SECRET}}" class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" id="BINANCE_API_SECRET" name="BINANCE_API_SECRET" type="text" required="" placeholder="Your BINANCE_API_SECRET" aria-label="Name">
        </div>
        <div class="mt-4">
          <button class="px-4 py-1 font-light tracking-wider text-white bg-gray-900 rounded" type="submit">Save</button>

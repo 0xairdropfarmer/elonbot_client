@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use Binance\API as BinanceAPI;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +12,11 @@ use App\Http\Controllers\ClientController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('testbuy',function(){
+$binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
+ $order = $binance->marketBuy("BNBUSDT", 1);
+return $order;
+});
 
     Route::post('recive_buy_signal', [ClientController::class, 'reciveBuySignal'])->name('recive_buy_signal');
 Route::middleware(['auth'])->group(function () {

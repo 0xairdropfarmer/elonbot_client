@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderHistoriesTable extends Migration
+class CreateApiKeysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateOrderHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_histories', function (Blueprint $table) {
+        Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
-            $table->string('symbol');
-            $table->string('orderId');
-            $table->string('status');
+            $table->string('BINANCE_API_KEY');
+            $table->string('BINANCE_API_SECRET');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateOrderHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_histories');
+        Schema::dropIfExists('api_keys');
     }
 }

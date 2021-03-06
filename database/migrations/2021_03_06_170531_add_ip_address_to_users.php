@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderHistoriesTable extends Migration
+class AddIpAddressToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateOrderHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_histories', function (Blueprint $table) {
-            $table->id();
-            $table->string('symbol');
-            $table->string('orderId');
-            $table->string('status');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('ip_address');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateOrderHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_histories');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }
