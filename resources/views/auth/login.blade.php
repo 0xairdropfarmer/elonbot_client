@@ -39,15 +39,11 @@
                 @endphp
                 @if($allowed_login)
                     <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('register') }}">
-                        {{ __('Register ') }}
+                        {{ __('Register') }}
                     </a>
                 @endif
 
-                @if (Route::has('password.request'))
-                    <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+
 
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
