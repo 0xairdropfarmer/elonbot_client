@@ -9,6 +9,8 @@ use Binance\API as BinanceAPI;
 use App\Models\OrderHistory;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
+use Spatie\Crypto\Rsa\KeyPair;
+
 class ClientController extends Controller
 {
     public function __construct()
@@ -61,9 +63,13 @@ class ClientController extends Controller
     }
       public function reciveBuySignal(Request $request)
     {
+        $pathToPublicKey = storage_path().'/key.pub';
+        $publicKey = \Spatie\Crypto\Rsa\PublicKey::fromFile($pathToPublicKey);
 
+        $verify = $publicKey->verify('my message', $request->get('signature'));
 
-        if(env('botstatus')){
+         if($verify){
+      if(env('botstatus')){
             if(env('buybtc') && $request->has('buybtc')){
                     $ApiKey = ApiKey::orderBy('created_at','desc')->first();
                     //  $binance = new BinanceAPI(env('BINANCE_API_KEY'),env('BINANCE_API_SECRET'));
@@ -125,5 +131,13 @@ class ClientController extends Controller
 
 
         }
+    }else{
+     return abort(403);
     }
+
+ }
+
+
+
+
 }

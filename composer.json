@@ -11,15 +11,16 @@
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "geo-sot/laravel-env-editor": "^0.9.11",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jackiedo/dotenv-editor": "^1.2",
         "jaggedsoft/php-binance-api": "^0.5.25",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^2.2",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
-         "geo-sot/laravel-env-editor": "^0.9.11",
-        "jackiedo/dotenv-editor": "^1.2"
+        "spatie/crypto": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

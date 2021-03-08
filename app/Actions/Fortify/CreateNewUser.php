@@ -11,6 +11,8 @@ use Laravel\Jetstream\Jetstream;
 use EnvEditor;
 use Illuminate\Support\Facades\Http;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
+
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
