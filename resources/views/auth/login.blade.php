@@ -33,20 +33,22 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
                 @php
 
                 $allowed_login = App\Models\Setting::where('allowed_register','yes')->first()
                 @endphp
                 @if($allowed_login)
                     <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('register') }}">
-                        {{ __('Register') }}
+                        {{ __('Register ') }}
                     </a>
                 @endif
+
+                @if (Route::has('password.request'))
+                    <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
