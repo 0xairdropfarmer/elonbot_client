@@ -11,7 +11,7 @@ use Laravel\Jetstream\Jetstream;
 use EnvEditor;
 use Illuminate\Support\Facades\Http;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -35,16 +35,18 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
-
+         $sign_message = Str::random(11);
          $result = Http::post(env('command_center_address').'/store_client_ip',[
             'email'=>$input['email'],
             'ip_address'=> $getClientIp,
+            'sign_message'=> $sign_message
          ]);
          info($result);
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'sign_message'=>$sign_message
         ]);
         }else{
              return abort('403');
