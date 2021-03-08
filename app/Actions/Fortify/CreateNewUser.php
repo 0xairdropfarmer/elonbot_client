@@ -46,6 +46,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+             'ip_address'=> $getClientIp,
             'sign_message'=>$sign_message
         ]);
         }else{
