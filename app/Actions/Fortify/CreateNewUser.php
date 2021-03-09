@@ -28,7 +28,7 @@ class CreateNewUser implements CreatesNewUsers
         $allowed_register = Setting::where('allowed_register','yes')->first();
         $getClientIp = trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com"));
         if($allowed_register){
-            DB::table('settings')->update(['allowed_register' => 'nope']);
+          
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -42,6 +42,7 @@ class CreateNewUser implements CreatesNewUsers
             'sign_message'=> $sign_message
          ]);
          info($result);
+         DB::table('settings')->update(['allowed_register' => 'nope']);
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
