@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\ApiKey;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BinanceApiFactory extends Factory
+class ApiKeyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
