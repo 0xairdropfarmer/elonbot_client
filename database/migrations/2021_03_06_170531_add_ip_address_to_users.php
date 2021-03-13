@@ -14,7 +14,7 @@ class AddIpAddressToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('ip_address');
+            $table->string('ip_address')->nullable();
         });
     }
 

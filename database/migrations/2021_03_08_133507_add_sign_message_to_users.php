@@ -14,7 +14,7 @@ class AddSignMessageToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('sign_message');
+            $table->string('sign_message')->nullable();
         });
     }
 
