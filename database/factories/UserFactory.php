@@ -25,7 +25,7 @@ class UserFactory extends Factory
         $getClientIp = trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com"));
         return [
             'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'email' => 'user@updatecoinnews.com',
             'email_verified_at' => now(),
             'ip_address'=> $getClientIp,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

@@ -15,8 +15,8 @@ class CreateApiKeysTable extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
-            $table->string('BINANCE_API_KEY');
-            $table->string('BINANCE_API_SECRET');
+            $table->string('BINANCE_API_KEY')->nullable();
+            $table->string('BINANCE_API_SECRET')->nullable();
             $table->timestamps();
         });
     }

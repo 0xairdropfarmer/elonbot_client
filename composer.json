@@ -20,6 +20,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
+        "rachidlaasri/laravel-installer": "^4.1",
         "spatie/crypto": "^2.0"
     },
     "require-dev": {

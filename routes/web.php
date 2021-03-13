@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderHistoryController;
 use Binance\API as BinanceAPI;
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('savetbinancekey', [ClientController::class, 'saveBinanceKey'])->name('savebinancekey');
     Route::post('setstatus', [ClientController::class, 'setStatus'])->name('setstatus');
     Route::post('adjustorder', [ClientController::class, 'adjustOrder'])->name('adjustorder');
+    Route::get('order_history', [OrderHistoryController::class, 'index'])->name('order_history');
 });
 

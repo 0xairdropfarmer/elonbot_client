@@ -9,7 +9,7 @@ use Binance\API as BinanceAPI;
 use App\Models\OrderHistory;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
-use Spatie\Crypto\Rsa\KeyPair;
+use App\Notifications\OrderNotify;
 
 class ClientController extends Controller
 {
@@ -29,36 +29,43 @@ class ClientController extends Controller
         $binance_test = new BinanceAPI($request->BINANCE_API_KEY,$request->BINANCE_API_SECRET);
 
        try {
-        $result = $binance_test->marketBuyTest("BTCUSDT",100);
+        $result = $binance_test->marketBuyTest("BTCUSDT",1);
 
     } catch (\Exception $exception) {
         return back()->withError($exception->getMessage())->withInput();
     }
-     ApiKey::updateOrCreate(['BINANCE_API_KEY'=>$request->BINANCE_API_KEY,'BINANCE_API_SECRET'=>$request->BINANCE_API_SECRET]);
+     $ApiKey = ApiKey::first();
+     $ApiKey->BINANCE_API_KEY = $request->BINANCE_API_KEY;
+     $ApiKey->BINANCE_API_SECRET = $request->BINANCE_API_SECRET;
+     $ApiKey->save();
+
          $request->session()->flash('success', 'Setup Binance API KEY success');
         return redirect()->route('dashboard');
     }
      public function adjustOrder(Request $request)
     {
+        $ApiKey = ApiKey::first();
+        $ApiKey->buydoge = $request->buydoge;
+        $ApiKey->buybtc = $request->buybtc;
+        $ApiKey->doge_order_size = $request->doge_order_size;
+        $ApiKey->btc_order_size = $request->btc_order_size;
+        $ApiKey->save();
 
-         EnvEditor::editKey('buydoge',$request->buydoge);
-         EnvEditor::editKey('buybtc',$request->buybtc);
-         EnvEditor::editKey('doge_order_size',$request->doge_order_size);
-         EnvEditor::editKey('btc_order_size',$request->btc_order_size);
          $request->session()->flash('success', 'Adjust order success');
           return redirect()->route('dashboard');
     }
      public function setStatus(Request $request)
     {
 
-         if($request->get('status') == 'start'){
+         if($request->get('botstatus') == 'start'){
            $request->session()->flash('success', 'bot already started');
          }else{
 
             $request->session()->flash('danger', 'bot already stop');
          }
-         EnvEditor::editKey('botstatus',$request->status);
-
+         $ApiKey = ApiKey::first();
+         $ApiKey->botstatus = $request->botstatus;
+         $ApiKey->save();
            return redirect()->route('dashboard');
     }
       public function reciveBuySignal(Request $request)
@@ -83,6 +90,7 @@ class ClientController extends Controller
                 $orderHistory->orderId = $order['orderId'];
                 $orderHistory->status = $order['status'];
                 $orderHistory->save();
+                $orderHistory->notify(new OrderNotify($orderHistory));
     $result = Http::post(env('command_center_address').'/keep_order_history',[
 
             'ip_address'=> $this->ip_address,
@@ -90,6 +98,7 @@ class ClientController extends Controller
              'orderId'=>$order['orderId'],
               'status'=>$order['status'],
          ]);
+
         info($result);
                  } catch (\Exception $exception) {
 
@@ -113,6 +122,7 @@ class ClientController extends Controller
                 $orderHistory->orderId = $order['orderId'];
                 $orderHistory->status = $order['status'];
                 $orderHistory->save();
+                $orderHistory->notify(new OrderNotify($orderHistory));
                 $result = Http::post(env('command_center_address').'/keep_order_history',[
                     'ip_address'=> $this->ip_address,
                     'symbol'=>$order['symbol'],
